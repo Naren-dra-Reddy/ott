@@ -21,12 +21,23 @@ function route(){
 );
 }
 
-function Search() {
-    const [movieList,setMovieList]=useState([])
+function Search(props) {
+  const addedList = props.addedList
+  const setAddedList = props.setAddedList
+  const getAllMovies = () => {
+    const movieArr = Object.values(genres).map(item=>{
+      return item.map(movie=>movie
+       )
+     }
+     )
+    return movieArr.flat()
+  }
+    const [movieList,setMovieList]=useState(getAllMovies())
     const [genre,setGenre]=useState("")
     function handleChange(e){
       setMovieList(genres[e.target.value])
       setGenre(e.target.value)
+      console.log(genres[e.target.value])
     } 
     function searchMovie(){
       const movieName=document.getElementById("searchInput").value;
@@ -44,6 +55,7 @@ function Search() {
       })
     
     setMovieList(tempMovieList);
+ 
       }
     }
   return (    
@@ -57,7 +69,7 @@ function Search() {
           </button>
           <div className='select'>
             <select name="Genre" id="genre" className="genre-select"  onChange={handleChange}>
-              <option value="">--Genre--</option>
+              <option value="" disabled selected>--Genre--</option>
               <option value="ACTION">ACTION</option>
               <option value="SCI-FI">SCI-FI</option>
               <option value="THRILLER">THRILLER</option>
@@ -70,11 +82,18 @@ function Search() {
         {/* </form> */}
         <div className='display'>
          {/*<h1 className='genre'>{genre}</h1>*/}
+         <div className='movie-container'>
          {
+          
           movieList.length != 0 && movieList.map(item => {
-            return <Movie key={item.id} src={item.image} title={item.title} rating={item.rating} />
+            return <Movie key={item.id} id={item.id} src={item.image} title={item.title} rating={item.rating}
+                        addedList={addedList} setAddedList={setAddedList}
+                        />
+                      
           })
-        }
+        } 
+        </div>
+        
         {
           movieList.length == 0 && <MovieNotFound />
         }

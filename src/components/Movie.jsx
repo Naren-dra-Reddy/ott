@@ -7,7 +7,6 @@ const Movie=(props)=>{
     const [effect, setEffect] = useState(false);
     const addedList = props.addedList
     const setAddedList = props.setAddedList
-    
     const checkifMovieInAddedList = () => {
         if(id in addedList){
             return true

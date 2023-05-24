@@ -17,7 +17,7 @@ function App(){
           <Route path="movies" element={<MoviePage addedList={addedList} setAddedList={setAddedList}/>} />
           <Route path="tvseries" element={<Tv />} />
           <Route path="about" element={<About />} />
-          <Route path="search" element={<Search/>}/>
+          <Route path="search" element={<Search addedList={addedList} setAddedList={setAddedList}/>}/>
           <Route path="list" element={<List addedList={addedList} setAddedList={setAddedList}/>}/>
       </Routes>
     </>
